@@ -13,13 +13,13 @@ This VS Code extension works with markdown files in the `help-docs` repository. 
 
 ## How it works
 
-After selecting some text, run the extension using the keyboard shortcut:
+Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then run the extension using the keyboard shortcut:
 
 **Mac**: control + command + o
 
 **Windows**: control + alt + o
 
-Or choose **Open reusable file** from the command palette.
+Alternatively run the extension from the command palette by choosing **Open reusable file**.
 
 ## Installation
 
