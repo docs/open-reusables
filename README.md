@@ -15,9 +15,9 @@ This VS Code extension works with markdown files in the `help-docs` repository. 
 
 Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then run the extension using the keyboard shortcut:
 
-**Mac**: control + command + o
+**Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
 
-**Windows**: control + alt + o
+**Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>o</kbd>
 
 Alternatively run the extension from the command palette by choosing **Open reusable file**.
 
