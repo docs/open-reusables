@@ -21,6 +21,24 @@ After selecting some text, run the extension using the keyboard shortcut:
 
 Or choose **Open reusable file** from the command palette.
 
+## Installation
+
+To install:
+
+1. Download [open-reusable-1.0.0.vsix](/hubwriter/open-reusables/open-reusable-1.0.0.vsix).
+
+1. Launch VS Code and display the extensions panel:
+
+   [Extensions panel](/hubwriter/open-reusables/images/extension-installation2.png)
+
+1. Click the ellipsis button (top right of the panel).
+
+1. Choose **Install from VSIX**:
+
+   [Install from VSIX option](/hubwriter/open-reusables/images/extension-installation2.png)
+
+1. Browse to the `.vsix` file and click **Install**.
+
 ## Known Issues
 
 Currently the extension doesn't work on Windows
