@@ -11,7 +11,7 @@
 
 This VS Code extension works with markdown files in the `help-docs` repository. While you are displaying a markdown file for a help article, you can select text containing a reference to a variable or a reusable and run the extension to open the variable or reusable file in a new tab. 
 
-## Features
+## How it works
 
 After selecting some text, run the extension using the keyboard shortcut:
 
@@ -25,17 +25,17 @@ Or choose **Open reusable file** from the command palette.
 
 To install:
 
-1. Download [open-reusable-1.0.0.vsix](/hubwriter/open-reusables/open-reusable-1.0.0.vsix).
+1. Download [open-reusable-1.0.0.vsix](https://raw.githubusercontent.com/hubwriter/open-reusables/master/open-reusable-1.0.0.vsix).
 
 1. Launch VS Code and display the extensions panel:
 
-   [Extensions panel](/hubwriter/open-reusables/images/extension-installation2.png)
+   ![Extensions panel](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation2.png)
 
 1. Click the ellipsis button (top right of the panel).
 
 1. Choose **Install from VSIX**:
 
-   [Install from VSIX option](/hubwriter/open-reusables/images/extension-installation2.png)
+   ![Install from VSIX option](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation2.png)
 
 1. Browse to the `.vsix` file and click **Install**.
 
