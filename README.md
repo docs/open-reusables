@@ -29,7 +29,7 @@ To install:
 
 1. Launch VS Code and display the extensions panel:
 
-   ![Extensions panel](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation2.png)
+   ![Extensions panel](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation1.png)
 
 1. Click the ellipsis button (top right of the panel).
 
