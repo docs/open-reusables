@@ -14,5 +14,5 @@ Or choose **Open reusable file** from the command palette.
 
 ## Known Issues
 
-None so far.
+Currently the extension doesn't work on Windows
 
