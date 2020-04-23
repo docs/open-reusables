@@ -13,62 +13,75 @@ function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('The extension "open-reusable" is now active.');
 
-	// // The command has been defined in the package.json file
-	// // Now provide the implementation of the command with  registerCommand
-	// // The commandId parameter must match the command field in package.json
-	// let disposable = vscode.commands.registerCommand('open-reusable', function () {
-	// 	// The code you place here will be executed every time your command is executed
-	// 	var editor = vscode.window.activeTextEditor;
-	// 	if (!editor) {
-	// 		vscode.window.showInformationMessage('No editor tab currently open');
-	// 		return;
-	// 	}
+	// The command has been defined in the package.json file
+	// Now provide the implementation of the command with  registerCommand
+	// The commandId parameter must match the command field in package.json
+	let disposable = vscode.commands.registerCommand('open-reusable', function () {
+		// The code you place here will be executed every time your command is executed
+		var editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			vscode.window.showInformationMessage('No editor tab currently open');
+			return;
+		}
 
-	// 	var reusableString = "";
-	// 	const range = editor.document.getWordRangeAtPosition(
-	// 		editor.selection.active,
-	// 		/{{[^}]*}}/
-	// 	);
-	// 	if (range) {
-	// 		reusableString = editor.document.getText(range); 
-	// 	}
-	// 	if (reusableString === "") {
-	// 		var selection = editor.selection;
-	// 		reusableString = editor.document.getText(selection);	
-	// 	}
+		var reusableString = "";
+		const range = editor.document.getWordRangeAtPosition(
+			editor.selection.active,
+			/{{[^}]*}}/
+		);
+		if (range) {
+			reusableString = editor.document.getText(range); 
+		}
+		if (reusableString === "") {
+			var selection = editor.selection;
+			reusableString = editor.document.getText(selection);	
+		}
 
-	// 	var regex1 = /{{ *site\.data\.([^ }]*) *}}/;
-	// 	var regex1matchArray = reusableString.match(regex1);
-	// 	if (regex1matchArray === null) {
-	// 		vscode.window.showInformationMessage("You didn't select a reusable or a variable.");
-	// 		return;
-	// 	}
-	// 	else {
-	// 		let currentFilePath = editor.document.uri.fsPath;
-	// 		let regex2 = /.*\/help-docs\//;
-	// 		let regex2matchArray = currentFilePath.match(regex2);
-	// 		var basepath = regex2matchArray[0] + "data/";
+		var directorySeparator = "/";
+		// Detect whether this is Windows
+		var isWin = process.platform === "win32";
+		if (isWin) directorySeparator = "\\";
+	
+		var regex1 = /{{ *site\.data\.([^ }]*) *}}/;
+		var regex1matchArray = reusableString.match(regex1);
+		if (regex1matchArray === null) {
+			vscode.window.showInformationMessage("You didn't select a reusable or a variable.");
+			return;
+		}
+		else {		
+			var filepath = regex1matchArray[1];
+			filepath = filepath.replace(/\./g, directorySeparator);
+
+			let currentFilePath = editor.document.uri.fsPath;
+			console.log('The current file = ' + currentFilePath);
+			console.log('isWin = ' + isWin);
+			console.log('directorySeparator = ' + directorySeparator);
 			
-	// 		var filepath = regex1matchArray[1];
-	// 		filepath = filepath.replace(/\./g, '\/');
+			let regex2 = new RegExp(".*\\" + directorySeparator + "help-docs\\" + directorySeparator, "g");
+			let regex2matchArray = currentFilePath.match(regex2);
+			var basepath = regex2matchArray[0] + "data" + directorySeparator;
+			console.log('basepath = ' + basepath);
 
-	// 		if (filepath.indexOf('variables') === 0) {
-	// 			// You selected a variable, so remove the variable name at the end of the string,
-	// 			// thereby leaving the file name (minus .yml) at the end of the filepath string.
-	// 			let regex3 = /(.*)\//;
-	// 			let regex3matchArray = filepath.match(regex3);
-	// 			filepath = basepath + regex3matchArray[1] + ".yml";
-	// 		}
-	// 		else filepath = basepath + filepath + ".md";
+			if (filepath.indexOf('variables') === 0) {
+				// You selected a variable, so remove the variable name at the end of the string,
+				// thereby leaving the file name (minus .yml) at the end of the filepath string.
+				let regex3 = new RegExp("(.*)\\" + directorySeparator, "g");
+				
+				//            /(.*)\//;
+				let regex3matchArray = filepath.match(regex3);
+				filepath = basepath + regex3matchArray[1] + ".yml";
+			}
+			else filepath = basepath + filepath + ".md";
+
+			filepath = decodeURIComponent(filepath);
+			console.log('File to open = ' + filepath);	
 			
-	// 		vscode.workspace.openTextDocument(filepath)
-	// 			.then( (doc) => {
-	// 				//vscode.window.showInformationMessage('Opened: ' + filepath);
-	// 				console.log('Opened: ' + filepath);
-	// 				return vscode.window.showTextDocument(doc);
-	// 			});
-	// 	}
-	// });
+			vscode.workspace.openTextDocument(filepath)
+				.then( (doc) => {
+					return vscode.window.showTextDocument(doc);
+				});
+		}
+	});
 	context.subscriptions.push(disposable);
 }
 exports.activate = activate;
