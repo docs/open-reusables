@@ -25,17 +25,15 @@ function activate(context) {
 		}
 
 		var reusableString = "";
-		const range = editor.document.getWordRangeAtPosition(
-			editor.selection.active,
-			/{{[^}]*}}/
-		);
-		if (range) {
-			reusableString = editor.document.getText(range); 
+
+		var selection = editor.selection;
+		if (selection.isEmpty) {
+			let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /{{[^}]*}}/ );
+			if (objSelectTextAroundCursor) {
+				reusableString = editor.document.getText(objSelectTextAroundCursor); 
+			}
 		}
-		if (reusableString === "") {
-			var selection = editor.selection;
-			reusableString = editor.document.getText(selection);	
-		}
+		else reusableString = editor.document.getText(selection);
 
 		var directorySeparator = "/";
 		// Detect whether this is Windows
@@ -62,19 +60,21 @@ function activate(context) {
 			var basepath = regex2matchArray[0] + "data" + directorySeparator;
 			console.log('basepath = ' + basepath);
 
+console.log('AT this point filepath = ' + filepath);
+
 			if (filepath.indexOf('variables') === 0) {
-				// You selected a variable, so remove the variable name at the end of the string,
+				// You selected a variable, so remove the final directory separator
+				// and the variable name from the end of the string,
 				// thereby leaving the file name (minus .yml) at the end of the filepath string.
-				let regex3 = new RegExp("(.*)\\" + directorySeparator, "g");
-				
-				//            /(.*)\//;
-				let regex3matchArray = filepath.match(regex3);
-				filepath = basepath + regex3matchArray[1] + ".yml";
+				// This regex looks overly tricky, but has to work for both UNIX and Windows paths:
+				let regex3 = new RegExp("\\" + directorySeparator + "[^" + directorySeparator + "]*$");
+				filepath = filepath.replace(regex3, '');  //replace the matched string with nothing
+				filepath = basepath + filepath + ".yml";
 			}
 			else filepath = basepath + filepath + ".md";
 
 			filepath = decodeURIComponent(filepath);
-			console.log('File to open = ' + filepath);	
+			console.log('Path of file to open = ' + filepath);	
 			
 			vscode.workspace.openTextDocument(filepath)
 				.then( (doc) => {
