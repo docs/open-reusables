@@ -60,14 +60,12 @@ function activate(context) {
 			var basepath = regex2matchArray[0] + "data" + directorySeparator;
 			console.log('basepath = ' + basepath);
 
-console.log('AT this point filepath = ' + filepath);
-
 			if (filepath.indexOf('variables') === 0) {
 				// You selected a variable, so remove the final directory separator
 				// and the variable name from the end of the string,
 				// thereby leaving the file name (minus .yml) at the end of the filepath string.
 				// This regex looks overly tricky, but has to work for both UNIX and Windows paths:
-				let regex3 = new RegExp("\\" + directorySeparator + "[^" + directorySeparator + "]*$");
+				let regex3 = new RegExp("\\" + directorySeparator + "[^\\" + directorySeparator + "]*$");
 				filepath = filepath.replace(regex3, '');  //replace the matched string with nothing
 				filepath = basepath + filepath + ".yml";
 			}
