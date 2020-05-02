@@ -110,12 +110,13 @@ function findLineNumberOfVariable(variableName) {
 	var neweditor = vscode.window.activeTextEditor; // The newly opened document
 	var lineNumberOfVariable = 0;
 	var currentCursorLineNumber = neweditor.selection.active.line + 1;
+	var matchResultArray;
 
 	let lineCount = neweditor.document.lineCount;
 	for (let parseLine = 0; parseLine < lineCount; parseLine++) {
 		let lineText = neweditor.document.lineAt(parseLine);
 		let regex = new RegExp(variableName + ":");
-		let matchResultArray = lineText.text.match(regex);
+		matchResultArray = lineText.text.match(regex);
 		if (matchResultArray) {
 			lineNumberOfVariable = parseLine + 1;
 			console.log("'" + variableName + ":' matched on line: " + lineNumberOfVariable);
@@ -123,7 +124,9 @@ function findLineNumberOfVariable(variableName) {
 			centralizar(lineNumberOfVariable);
 			return;
 		}
-		else vscode.window.showInformationMessage("That variable isn't defined in this file.");
+	}
+	if (!matchResultArray) {
+		vscode.window.showInformationMessage("'" + variableName + "' isn't defined in this file.");
 	}
 }
 
