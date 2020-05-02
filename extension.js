@@ -18,14 +18,20 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('open-reusable', function () {
 		// The code you place here will be executed every time your command is executed
+		console.log("****** Console output from the 'open-reusable' extension ******");
 		var editor = vscode.window.activeTextEditor;
 		if (!editor) {
 			vscode.window.showInformationMessage('No editor tab currently open');
 			return;
 		}
+		var currentFilePath = editor.document.uri.fsPath;
+		console.log('The current file = ' + currentFilePath);
+		if (editor.document.isUntitled) {
+			vscode.window.showInformationMessage("This doesn't work on files that aren't saved in the help-docs directory.");
+			return;
+		}
 
 		var reusableString = "";
-
 		var selection = editor.selection;
 		if (selection.isEmpty) {
 			let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /{{[^}]*}}/ );
@@ -34,39 +40,42 @@ function activate(context) {
 			}
 		}
 		else reusableString = editor.document.getText(selection);
-
-		var directorySeparator = "/";
-		// Detect whether this is Windows
-		var isWin = process.platform === "win32";
-		if (isWin) directorySeparator = "\\";
 	
-		var regex1 = /{{ *site\.data\.([^ }]*) *}}/;
-		var regex1matchArray = reusableString.match(regex1);
-		if (regex1matchArray === null) {
+		var regex = /{{ *site\.data\.([^ }]*) *}}/;
+		var regexmatchArray = reusableString.match(regex);
+		if (regexmatchArray === null) {
 			vscode.window.showInformationMessage("You didn't select a reusable or a variable.");
 			return;
 		}
 		else {		
-			var filepath = regex1matchArray[1];
-			filepath = filepath.replace(/\./g, directorySeparator);
-
-			let currentFilePath = editor.document.uri.fsPath;
-			console.log('The current file = ' + currentFilePath);
+			var directorySeparator = "/";
+			// Detect whether this is Windows
+			var isWin = process.platform === "win32";
+			if (isWin) directorySeparator = "\\";
+	
 			console.log('isWin = ' + isWin);
 			console.log('directorySeparator = ' + directorySeparator);
+
+			var filepath = regexmatchArray[1];
+			filepath = filepath.replace(/\./g, directorySeparator);
 			
-			let regex2 = new RegExp(".*\\" + directorySeparator + "help-docs\\" + directorySeparator, "g");
-			let regex2matchArray = currentFilePath.match(regex2);
-			var basepath = regex2matchArray[0] + "data" + directorySeparator;
+			regex = new RegExp(".*\\" + directorySeparator + "help-docs\\" + directorySeparator, "g");
+			regexmatchArray = currentFilePath.match(regex);
+			var basepath = regexmatchArray[0] + "data" + directorySeparator;
 			console.log('basepath = ' + basepath);
 
 			if (filepath.indexOf('variables') === 0) {
-				// You selected a variable, so remove the final directory separator
-				// and the variable name from the end of the string,
-				// thereby leaving the file name (minus .yml) at the end of the filepath string.
-				// This regex looks overly tricky, but has to work for both UNIX and Windows paths:
-				let regex3 = new RegExp("\\" + directorySeparator + "[^\\" + directorySeparator + "]*$");
-				filepath = filepath.replace(regex3, '');  //replace the matched string with nothing
+				// You selected a variable, so: 
+				// 1) Get the variable name at the end of the filepath
+				regex = new RegExp("\\" + directorySeparator + "([^\\" + directorySeparator + "]*$)");
+
+				regexmatchArray = filepath.match(regex);
+				var variableName = regexmatchArray[1];
+				console.log("variableName = " + variableName);
+
+				// 2) Remove directorySeparator + variableName from the end of filepath:
+				filepath = filepath.replace(new RegExp(directorySeparator + variableName + '$'), '');
+
 				filepath = basepath + filepath + ".yml";
 			}
 			else filepath = basepath + filepath + ".md";
@@ -76,7 +85,11 @@ function activate(context) {
 			
 			vscode.workspace.openTextDocument(filepath)
 				.then( (doc) => {
-					return vscode.window.showTextDocument(doc);
+					return vscode.window.showTextDocument(doc).then(e => {
+						e.edit(editObject => {
+							findLineNumberOfVariable(variableName);
+						});
+					});
 				});
 		}
 	});
@@ -84,10 +97,88 @@ function activate(context) {
 }
 exports.activate = activate;
 
-// this method is called when your extension is deactivated
+// This method is called when the extension is deactivated
 function deactivate() {}
 
 module.exports = {
 	activate,
 	deactivate
+};
+
+
+function findLineNumberOfVariable(variableName) {
+	var neweditor = vscode.window.activeTextEditor; // The newly opened document
+	var lineNumberOfVariable = 0;
+	var currentCursorLineNumber = neweditor.selection.active.line + 1;
+
+	let lineCount = neweditor.document.lineCount;
+	for (let parseLine = 0; parseLine < lineCount; parseLine++) {
+		let lineText = neweditor.document.lineAt(parseLine);
+		let regex = new RegExp(variableName + ":");
+		let matchResultArray = lineText.text.match(regex);
+		if (matchResultArray) {
+			lineNumberOfVariable = parseLine + 1;
+			console.log("'" + variableName + ":' matched on line: " + lineNumberOfVariable);
+			moveCursor(currentCursorLineNumber, lineNumberOfVariable);
+			centralizar(lineNumberOfVariable);
+			return;
+		}
+		else vscode.window.showInformationMessage("That variable isn't defined in this file.");
+	}
+}
+
+function centralizar(lineToCenter) {
+	// Put the current line as close as possible to the centre of the visible area in the editor
+    vscode.commands.executeCommand("revealLine", {
+        lineNumber: lineToCenter,
+        at: "center"
+    });
+}
+
+function moveCursor(currentCursorLineNumber, targetLineNumber) {
+	console.log("Move the cursor from its current position on line: " + currentCursorLineNumber);
+	var errorPreamble = "Something is wrong with cursorMove to:";
+
+	// The executeCommand("cursorMove") command only works relative to the current cursor position
+	// and doesn't allow you to specify the line you want to move to.
+	// So we get around this by moving the cursor to the start of the document
+	// and then down to the line we've already determined contains the variable.
+
+	// Move the cursor to line 1 of the variables file
+	vscode.commands.executeCommand("cursorMove", {
+		to: "up",
+		by: "line",
+		value: currentCursorLineNumber
+	})
+	.then(undefined, err => {
+		console.error(errorPreamble + "up. " + err);
+	 });
+	 // Move the cursor down to the desired line
+	 vscode.commands.executeCommand("cursorMove", {
+		to: "down",
+		by: "line",
+		value: targetLineNumber -1
+	})
+	.then(undefined, err => {
+		console.error(errorPreamble + "down. " + err);
+	 });
+
+	 // The select property allows you to select everything between the current cursor position
+	 // and the position you've moved the cursor to.
+	 // So to select the whole line we first move the cursor to the start of the current line.
+	 // And then to the end of the line, including the select property
+
+	 vscode.commands.executeCommand("cursorMove", {
+		to: "wrappedLineStart"
+	})
+	.then(undefined, err => {
+		console.error(errorPreamble + "wrappedLineStart. " + err);
+	 });
+	 vscode.commands.executeCommand("cursorMove", {
+		to: "wrappedLineEnd",
+		select: true
+	})
+	.then(undefined, err => {
+		console.error(errorPreamble + "wrappedLineEnd. " + err);
+	 });
 }
