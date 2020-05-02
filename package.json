@@ -3,7 +3,7 @@
 	"displayName": "Open a reusable",
 	"description": "Open a variable or reusable referenced in the selected text",
 	"icon": "images/open-reusable-icon.png",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"publisher": "hubwriter",
 	"engines": {
 		"vscode": "^1.44.0"
