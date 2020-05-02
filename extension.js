@@ -74,7 +74,7 @@ function activate(context) {
 				console.log("variableName = " + variableName);
 
 				// 2) Remove directorySeparator + variableName from the end of filepath:
-				filepath = filepath.replace(new RegExp(directorySeparator + variableName + '$'), '');
+				filepath = filepath.replace(new RegExp("\\" + directorySeparator + variableName + '$'), '');
 
 				filepath = basepath + filepath + ".yml";
 			}
