@@ -65,15 +65,16 @@ function activate(context) {
 			console.log('basepath = ' + basepath);
 
 			if (filepath.indexOf('variables') === 0) {
-				// You selected a variable, so: 
-				// 1) Get the variable name at the end of the filepath
+				var isVariable = true;
+
+				// Get the variable name at the end of the filepath
 				regex = new RegExp("\\" + directorySeparator + "([^\\" + directorySeparator + "]*$)");
 
 				regexmatchArray = filepath.match(regex);
 				var variableName = regexmatchArray[1];
 				console.log("variableName = " + variableName);
 
-				// 2) Remove directorySeparator + variableName from the end of filepath:
+				// Remove directorySeparator + variableName from the end of filepath:
 				filepath = filepath.replace(new RegExp("\\" + directorySeparator + variableName + '$'), '');
 
 				filepath = basepath + filepath + ".yml";
@@ -87,7 +88,7 @@ function activate(context) {
 				.then( (doc) => {
 					return vscode.window.showTextDocument(doc).then(e => {
 						e.edit(editObject => {
-							findLineNumberOfVariable(variableName);
+							if (isVariable) findLineNumberOfVariable(variableName);
 						});
 					});
 				});
