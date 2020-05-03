@@ -44,7 +44,7 @@ function activate(context) {
 		var regex = /{{ *site\.data\.([^ }]*) *}}/;
 		var regexmatchArray = reusableString.match(regex);
 		if (regexmatchArray === null) {
-			vscode.window.showInformationMessage("You didn't select a reusable or a variable.");
+			vscode.window.showInformationMessage("You didn't select a valid reusable or a variable.");
 			return;
 		}
 		else {		
@@ -84,14 +84,15 @@ function activate(context) {
 			filepath = decodeURIComponent(filepath);
 			console.log('Path of file to open = ' + filepath);	
 			
-			vscode.workspace.openTextDocument(filepath)
-				.then( (doc) => {
-					return vscode.window.showTextDocument(doc).then(e => {
-						e.edit(editObject => {
-							if (isVariable) findLineNumberOfVariable(variableName);
-						});
+			vscode.workspace.openTextDocument(filepath).then(doc => {
+				return vscode.window.showTextDocument(doc).then(e => {
+					e.edit(editObject => {
+						if (isVariable) findLineNumberOfVariable(variableName);
 					});
 				});
+			}, (err) => {
+				vscode.window.showErrorMessage("File not found: " + filepath);
+			});
 		}
 	});
 	context.subscriptions.push(disposable);
