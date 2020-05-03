@@ -127,6 +127,12 @@ function findLineNumberOfVariable(variableName) {
 		}
 	}
 	if (!matchResultArray) {
+		// Move the cursor to line 1 of the variables file
+		vscode.commands.executeCommand("cursorMove", {
+			to: "up",
+			by: "line",
+			value: currentCursorLineNumber
+		})		
 		vscode.window.showInformationMessage("'" + variableName + "' isn't defined in this file.");
 	}
 }
