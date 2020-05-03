@@ -25,7 +25,7 @@ Alternatively run the extension from the command palette by choosing **Open reus
 
 To install this extension:
 
-1. Download the `.vsix` package file from this repository (see [https://github.com/hubwriter/open-reusables](https://github.com/hubwriter/open-reusables#)).
+1. Download the `.vsix` package file from the [https://github.com/hubwriter/open-reusables](https://github.com/hubwriter/open-reusables#) repository.
 
 1. Launch VS Code and display the extensions panel:
 

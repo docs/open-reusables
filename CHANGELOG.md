@@ -1,7 +1,7 @@
 # Change log
 
 ## 1.1.0 
-02 May 2020
+03 May 2020
 
 - Fixed directory separators so that the extension now works on Windows as well as Mac/Linux.
 - You can now open a variable or reusable by just clicking within it (or selecting text containing the variable or reusable), then running the extension. This is a a quicker/easier selection method.
