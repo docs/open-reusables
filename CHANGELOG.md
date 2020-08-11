@@ -1,6 +1,11 @@
 # Change log
 
 ## 1.1.0 
+11 August 2020
+
+- Get it to work with the renamed `help-docs` repo: now called `docs-internal`.
+
+## 1.1.0 
 03 May 2020
 
 - Fixed directory separators so that the extension now works on Windows as well as Mac/Linux.
