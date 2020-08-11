@@ -27,7 +27,7 @@ function activate(context) {
 		var currentFilePath = editor.document.uri.fsPath;
 		console.log('The current file = ' + currentFilePath);
 		if (editor.document.isUntitled) {
-			vscode.window.showInformationMessage("This doesn't work on files that aren't saved in the help-docs directory.");
+			vscode.window.showInformationMessage("This doesn't work on files that aren't saved in the GitHub docs repository.");
 			return;
 		}
 
@@ -59,7 +59,7 @@ function activate(context) {
 			var filepath = regexmatchArray[1];
 			filepath = filepath.replace(/\./g, directorySeparator);
 			
-			regex = new RegExp(".*\\" + directorySeparator + "help-docs\\" + directorySeparator, "g");
+			regex = new RegExp(".*\\" + directorySeparator + "(help-docs|docs-internal)\\" + directorySeparator, "g");
 			regexmatchArray = currentFilePath.match(regex);
 			var basepath = regexmatchArray[0] + "data" + directorySeparator;
 			console.log('basepath = ' + basepath);
