@@ -1,6 +1,6 @@
 # Change log
 
-## 1.1.0 
+## 1.1.1 
 11 August 2020
 
 - Get it to work with the renamed `help-docs` repo: now called `docs-internal`.
