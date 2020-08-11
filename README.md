@@ -9,7 +9,7 @@
 
 ## Overview
 
-This VS Code extension works with markdown files in the [`help-docs`](https://github.com/github/help-docs) repository. While you are displaying a markdown file for a help article, you can select text containing a reference to a variable or a reusable and run the extension to open the variable or reusable file in a new tab. 
+This VS Code extension works with markdown files in the [`docs`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can select text containing a reference to a variable or a reusable and run the extension to open the variable or reusable file in a new tab. 
 
 ## Using the extension
 
