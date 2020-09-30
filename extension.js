@@ -34,14 +34,14 @@ function activate(context) {
 		var reusableString = "";
 		var selection = editor.selection;
 		if (selection.isEmpty) {
-			let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /{{[^}]*}}/ );
+			let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /{%[^%]*%}/ );
 			if (objSelectTextAroundCursor) {
 				reusableString = editor.document.getText(objSelectTextAroundCursor); 
 			}
 		}
 		else reusableString = editor.document.getText(selection);
 	
-		var regex = /{{ *site\.data\.([^ }]*) *}}/;
+		var regex = /{% *data ([^ %]*) *%}/;
 		var regexmatchArray = reusableString.match(regex);
 		if (regexmatchArray === null) {
 			vscode.window.showInformationMessage("You didn't select a valid reusable or a variable.");
