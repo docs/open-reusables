@@ -1,5 +1,10 @@
 # Change log
 
+## 1.2.0 
+30 September 2020
+
+- Change the regular expression to work with the new format for reusables. What was previously `{{ site.data.reusables.package_registry.authenticate-packages }}` is now `{% data reusables.package_registry.authenticate-packages %}`.
+
 ## 1.1.1 
 11 August 2020
 
