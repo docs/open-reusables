@@ -140,24 +140,24 @@ function moveCursor(currentCursorLineNumber, targetLineNumber) {
 		console.error(errorPreamble + "down. " + err);
 	 });
 
-	 // The select property allows you to select everything between the current cursor position
-	 // and the position you've moved the cursor to.
-	 // So to select the whole line we first move the cursor to the start of the current line.
-	 // And then to the end of the line, including the select property
+    // The select property allows you to select everything between the current cursor position
+    // and the position you've moved the cursor to.
+    // So to select the whole line we first move the cursor to the start of the current line.
+    // And then to the end of the line, including the select property
 
-	 vscode.commands.executeCommand("cursorMove", {
+    vscode.commands.executeCommand("cursorMove", {
 		to: "wrappedLineStart"
 	})
 	.then(undefined, err => {
 		console.error(errorPreamble + "wrappedLineStart. " + err);
-	 });
-	 vscode.commands.executeCommand("cursorMove", {
+    });
+    vscode.commands.executeCommand("cursorMove", {
 		to: "wrappedLineEnd",
 		select: true
 	})
 	.then(undefined, err => {
 		console.error(errorPreamble + "wrappedLineEnd. " + err);
-	 });
+    });
 }
 
 module.exports = {
