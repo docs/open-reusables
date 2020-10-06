@@ -17,21 +17,21 @@ You can also quickly copy a variable or a reusable. Handy for when you need to u
 
 * To open a reusable or variable file:
 
-   Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then use the keyboard shortcut to run the extension:
+   Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then press:
 
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
    
    **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>o</kbd>
 
-* To open a reusable or variable file:
+* To copy a reusable or variable file:
 
-   Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then use the keyboard shortcut to run the extension:
+   Click inside a reusable or variable to place the cursor there, then press:
 
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>c</kbd>
 
    **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>c</kbd>
 
-Alternatively run the extension from the command palette by choosing **Open reusable file**.
+Alternatively run the extension from the command palette by choosing **Open reusable file** or **Copy the reusable at the cursor position**.
 
 ## Installing the extension
 
