@@ -59,7 +59,7 @@ function activate(context) {
 			var filepath = regexmatchArray[1];
 			filepath = filepath.replace(/\./g, directorySeparator);
 			
-			regex = new RegExp(".*\\" + directorySeparator + "(help-docs|docs-internal)\\" + directorySeparator, "g");
+			regex = new RegExp(".*\\" + directorySeparator + "(help-docs|docs-internal|docs)\\" + directorySeparator, "g");
 			regexmatchArray = currentFilePath.match(regex);
 			var basepath = regexmatchArray[0] + "data" + directorySeparator;
 			console.log('basepath = ' + basepath);
