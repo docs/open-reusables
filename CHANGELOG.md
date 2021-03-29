@@ -1,5 +1,10 @@
 # Change log
 
+## 1.3.0 
+6 October 2020
+
+- Restructure the JavaScript into modules. Add copying functionality. You can now press control+command+c to copy the variable or reusable at the current cursor position.
+
 ## 1.2.0 
 30 September 2020
 

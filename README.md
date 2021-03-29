@@ -9,17 +9,29 @@
 
 ## Overview
 
-This VS Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can select text containing a reference to a variable or a reusable and run the extension to open the variable or reusable file in a new tab. 
+This VS Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can click a variable or a reusable in the markdown and then run the extension to open the variable or reusable file in a new tab. 
+
+You can also quickly copy a variable or a reusable. Handy for when you need to use the same variable more than once in a topic.
 
 ## Using the extension
 
-Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then run the extension using the keyboard shortcut:
+* To open a reusable or variable file:
 
-**Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
+   Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then press:
 
-**Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>o</kbd>
+   **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
+   
+   **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>o</kbd>
 
-Alternatively run the extension from the command palette by choosing **Open reusable file**.
+* To copy a reusable or variable file:
+
+   Click inside a reusable or variable to place the cursor there, then press:
+
+   **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>c</kbd>
+
+   **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>c</kbd>
+
+Alternatively run the extension from the command palette by choosing **Open reusable file** or **Copy the reusable at the cursor position**.
 
 ## Installing the extension
 
