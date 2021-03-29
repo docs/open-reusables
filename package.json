@@ -12,7 +12,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:open-reusable"
+		"onCommand:open-reusable",
+		"onCommand:copy-reusable"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -20,13 +21,22 @@
 			{
 				"command": "open-reusable",
 				"title": "Open reusable file"
-			}
+			},
+			{
+				"command": "copy-reusable",
+				"title": "Copy the reusable at the cursor position"
+			}			
 		],
         "keybindings": [
             {
                 "command": "open-reusable",
                 "key": "ctrl+alt+o",
                 "mac": "ctrl+cmd+o"
+			},
+            {
+                "command": "copy-reusable",
+                "key": "ctrl+alt+c",
+                "mac": "ctrl+cmd+c"
             }
         ]
 	},
