@@ -1,7 +1,4 @@
 Test
-again
-last time
-sign this
-authored by John Doe
-authored by Joel Hawksley
-joelhawksley
+
+new line
+END
