@@ -3,6 +3,7 @@ Test
 delete a few lines
 zebra
 lion
+meerkat
 
 new line
 END
