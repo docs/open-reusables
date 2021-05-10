@@ -4,6 +4,7 @@ delete a few lines
 zebra
 lion
 meerkat
+cow
 
 new line
 END
