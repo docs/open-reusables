@@ -17,7 +17,7 @@ You can also quickly copy a variable or a reusable. Handy for when you need to u
 
 * To open a reusable or variable file:
 
-   Either select some text containing a reusable or a variable, or just click inside a reusable or variable to place the cursor there, then press:
+   Either select some markdown containing a reusable or a variable, or just click inside the tag for a reusable or variable to place the cursor there, then press:
 
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
    
@@ -25,7 +25,7 @@ You can also quickly copy a variable or a reusable. Handy for when you need to u
 
 * To copy a [Liquid tag](https://shopify.github.io/liquid/tags/control-flow/), such as the reference to a reusable or variable:
 
-   Click inside a reusable or variable to place the cursor there, then press:
+   Click inside the tag to place the cursor there, then press:
 
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>c</kbd>
 
