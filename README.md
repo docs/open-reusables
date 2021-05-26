@@ -23,7 +23,7 @@ You can also quickly copy a variable or a reusable. Handy for when you need to u
    
    **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>o</kbd>
 
-* To copy a reusable or variable file:
+* To copy a [Liquid tag](https://shopify.github.io/liquid/tags/control-flow/), such as the reference to a reusable or variable:
 
    Click inside a reusable or variable to place the cursor there, then press:
 
