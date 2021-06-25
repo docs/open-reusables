@@ -9,7 +9,6 @@ on:
 
 jobs:
   stale:
-    if: github.repository == 'github/docs-content'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@9d6f46564a515a9ea11e7762ab3957ee58ca50da
