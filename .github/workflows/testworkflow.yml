@@ -15,8 +15,8 @@ jobs:
       - uses: actions/stale@9d6f46564a515a9ea11e7762ab3957ee58ca50da
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          stale-issue-message: 'Thanks for contributing to the docs by opening an issue! It looks like this issue might be stale. If you''d still like to see these proposed changes made, please open a new issue using [this issue form](https://github.com/github/docs-content/issues/new?assignees=&labels=Improve+existing+docs&template=improve-existing-docs.yml&title=%5BImprovement%5D%3A+). The issue form contains instructions for making the necessary documentation changes yourself and how to request support from the Docs team.'
-          stale-pr-message: 'This PR has been open 60 days with no activity. Unless you take action, this PR will be closed as stale in 24 hours. If it''s closed in error, please feel free to reopen.'
+          stale-issue-message: "Thanks for contributing to the docs by opening an issue! It looks like this issue might be stale. If you'd still like to see these proposed changes made, please open a new issue using [this issue form](https://github.com/github/docs-content/issues/new?assignees=&labels=Improve+existing+docs&template=improve-existing-docs.yml&title=%5BImprovement%5D%3A+). The issue form contains instructions for making the necessary documentation changes yourself and how to request support from the Docs team."
+          stale-pr-message: "This PR has been open 60 days with no activity. Unless you take action, this PR will be closed as stale in 24 hours. If it's closed in error, please feel free to reopen."
           days-before-stale: 60
           days-before-close: -1
           only-labels: 'Improve existing docs'
