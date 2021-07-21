@@ -51,3 +51,4 @@ To install this extension:
 
 1. Browse to the `.vsix` file and click **Install**.
 
+x
