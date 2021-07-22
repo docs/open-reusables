@@ -9,7 +9,7 @@
 
 ## Overview
 
-This VS Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can click a variable or a reusable in the markdown and then run the extension to open the variable or reusable file in a new tab. 
+This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can click a variable or a reusable in the markdown and then run the extension to open the variable or reusable file in a new tab. 
 
 You can also quickly copy a variable or a reusable. Handy for when you need to use the same variable more than once in a topic.
 
