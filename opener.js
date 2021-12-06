@@ -14,64 +14,92 @@ function openMain() {
 
     var selection = editor.selection;
     if (selection.isEmpty) {
-        var reusableString = shared.getReusableString(editor);
-        // console.log('reusableString = ' + reusableString);
+        var selectedString = shared.getReusableString(editor);
+        // console.log('selectedString = ' + selectedString);
     }
-    else reusableString = editor.document.getText(selection);
+    else selectedString = editor.document.getText(selection);
 
-    var regex = /{% *data ([^ %]*) *%}/;
-    var regexmatchArray = reusableString.match(regex);
-    if (regexmatchArray === null) {
-        vscode.window.showInformationMessage("You didn't select a valid reusable or a variable.");
-        return;
-    }
-    else {		
-        var directorySeparator = "/";
-        // Detect whether this is Windows
-        var isWin = process.platform === "win32";
-        if (isWin) directorySeparator = "\\";
-
-        // console.log('isWin = ' + isWin);
-        // console.log('directorySeparator = ' + directorySeparator);
-
-        var filepath = regexmatchArray[1];
-        filepath = filepath.replace(/\./g, directorySeparator);
-        
-        regex = new RegExp(".*\\" + directorySeparator + "(help-docs|docs-internal)\\" + directorySeparator, "g");
-        regexmatchArray = currentFilePath.match(regex);
-        var basepath = regexmatchArray[0] + "data" + directorySeparator;
-        // console.log('basepath = ' + basepath);
-
-        if (filepath.indexOf('variables') === 0) {
-            var isVariable = true;
-
-            // Get the variable name at the end of the filepath
-            regex = new RegExp("\\" + directorySeparator + "([^\\" + directorySeparator + "]*$)");
-
-            regexmatchArray = filepath.match(regex);
-            var variableName = regexmatchArray[1];
-            // console.log("variableName = " + variableName);
-
-            // Remove directorySeparator + variableName from the end of filepath:
-            filepath = filepath.replace(new RegExp("\\" + directorySeparator + variableName + '$'), '');
-
-            filepath = basepath + filepath + ".yml";
+    var reusableRegex = /{% *data ([^ %]*) *%}/;
+    var regexmatchArray = selectedString.match(reusableRegex);
+    
+    var matchType = null;
+    if (regexmatchArray !== null) {
+        matchType = 'reusable';
+    } else {
+        var featureFlagRegex = /{% *(?:if|ifversion) *([^ %]*) *%}/;
+        regexmatchArray = selectedString.match(featureFlagRegex);
+        if (regexmatchArray !== null) {
+            matchType = 'feature';
+        } else {
+            vscode.window.showInformationMessage("You didn't select a valid reusable, variable, or feature flag.");
+            return;
         }
-        else filepath = basepath + filepath + ".md";
-
-        filepath = decodeURIComponent(filepath);
-        // console.log('Path of file to open = ' + filepath);	
-        
-        vscode.workspace.openTextDocument(filepath).then(doc => {
-            return vscode.window.showTextDocument(doc).then(e => {
-                e.edit(editObject => {
-                    if (isVariable) findLineNumberOfVariable(variableName);
-                });
-            });
-        }, (err) => {
-            vscode.window.showErrorMessage("File not found: " + filepath);
-        });
     }
+    // console.log('matchType = ' + matchType);
+
+    var directorySeparator = "/";
+    // Detect whether this is Windows
+    var isWin = process.platform === "win32";
+    if (isWin) directorySeparator = "\\";
+
+    // console.log('isWin = ' + isWin);
+    // console.log('directorySeparator = ' + directorySeparator);
+
+    var filepath = regexmatchArray[1];
+    filepath = filepath.replace(/\./g, directorySeparator);
+    
+    var regex = new RegExp(".*\\" + directorySeparator + "(docs|docs-internal)\\" + directorySeparator, "g");
+    regexmatchArray = currentFilePath.match(regex);
+
+
+    switch (matchType) {
+        case 'reusable':
+            var basepath = regexmatchArray[0] + "data" + directorySeparator;
+            break;
+        case 'feature':
+            var basepath = regexmatchArray[0] + "data" + directorySeparator + "features" + directorySeparator;
+            break;
+    }
+    // console.log('basepath = ' + basepath);
+
+    if (filepath.indexOf('variables') === 0) {
+        var isVariable = true;
+
+        // Get the variable name at the end of the filepath
+        regex = new RegExp("\\" + directorySeparator + "([^\\" + directorySeparator + "]*$)");
+
+        regexmatchArray = filepath.match(regex);
+        var variableName = regexmatchArray[1];
+        // console.log("variableName = " + variableName);
+
+        // Remove directorySeparator + variableName from the end of filepath:
+        filepath = filepath.replace(new RegExp("\\" + directorySeparator + variableName + '$'), '');
+
+        filepath = basepath + filepath + ".yml";
+    }
+    else {
+        switch (matchType) {
+          case 'reusable':
+              filepath = basepath + filepath + ".md";
+              break;
+          case 'feature':
+              filepath = basepath + filepath + ".yml";
+              break;
+        }
+    }
+
+    filepath = decodeURIComponent(filepath);
+    // console.log('Path of file to open = ' + filepath);	
+    
+    vscode.workspace.openTextDocument(filepath).then(doc => {
+        return vscode.window.showTextDocument(doc).then(e => {
+            e.edit(editObject => {
+                if (isVariable) findLineNumberOfVariable(variableName);
+            });
+        });
+    }, (err) => {
+        vscode.window.showErrorMessage("File not found: " + filepath);
+    });
 }
 
 function findLineNumberOfVariable(variableName) {
