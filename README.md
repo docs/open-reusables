@@ -9,15 +9,15 @@
 
 ## Overview
 
-This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a help article, you can click a variable or a reusable in the markdown and then run the extension to open the variable or reusable file in a new tab. 
+This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a GitHub help article, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the variable or reusable file in a new tab. 
 
 You can also quickly copy a variable or a reusable. Handy for when you need to use the same variable more than once in a topic.
 
 ## Using the extension
 
-* To open a reusable or variable file:
+* To open a reusable file, a variable file, or a feature-based versioning file:
 
-   Either select some markdown containing a reusable or a variable, or just click inside the tag for a reusable or variable to place the cursor there, then press:
+   Either select some markdown containing a reusable, a variable, or a feature-based versioning tag, or just click inside the tag to place the cursor there, then press:
 
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>o</kbd>
    
@@ -37,7 +37,7 @@ Alternatively run the extension from the command palette by choosing **Open reus
 
 To install this extension:
 
-1. Download the `.vsix` package file from the [https://github.com/hubwriter/open-reusables](https://github.com/hubwriter/open-reusables#) repository.
+1. Download the lastest `.vsix` package file from the [https://github.com/hubwriter/open-reusables](https://github.com/hubwriter/open-reusables#) repository.
 
 1. Launch VS Code and display the extensions panel:
 
