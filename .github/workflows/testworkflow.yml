@@ -33,7 +33,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@9d6f46564a515a9ea11e7762ab3957ee58ca50da
+      - uses: actions/stale@7fb802b3079a276cf3c7e6ba9aa003c665b3f838
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: |
