@@ -9,7 +9,7 @@
 
 ## Overview
 
-This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) repository. While you are displaying a markdown file for a GitHub help article, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the variable or reusable file in a new tab. 
+This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) and [`docs`](https://github.com/github/docs) repositories. While you are displaying a markdown file for a GitHub help article, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the variable or reusable file in a new tab. 
 
 You can also quickly copy a variable or a reusable. Handy for when you need to use the same variable more than once in a topic.
 
