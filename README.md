@@ -9,9 +9,13 @@
 
 ## Overview
 
-This Visual Studio Code extension works with markdown files in the [`docs-internal`](https://github.com/github/docs-internal) and [`docs`](https://github.com/github/docs) repositories. While you are displaying a markdown file for a GitHub help article in VS Code, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the related file for the variable, reusable, or version in a new VS Code tab. 
+Open the file corresponding to a Liquid tag for reusable text, a variable, or feature-based versioning, in the markdown file for an article on [docs.github.com](https://docs.github.com).
 
-You can also quickly copy a variable or a reusable. Handy for when you need to use the same variable more than once in a topic.
+This Visual Studio Code extension works with markdown files in the public and internal repositories for GitHub's public-facing documentation. For example, the public [`docs`](https://github.com/github/docs) repository. 
+
+While you're displaying a markdown file for a GitHub help article in Visual Studio Code, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the related file for the variable, reusable, or version in a new Visual Studio Code tab. 
+
+You can also quickly copy the tag for a variable or a reusable. This is useful when you need to use the same variable more than once in an article.
 
 ## Using the extension
 
@@ -35,7 +39,9 @@ Alternatively run the extension from the command palette by choosing **Open reus
 
 ## Installing the extension
 
-To install this extension:
+The easiest way is to go to [the page for this extension in the Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AlistairChristie.open-reusables) and click **Install**.
+
+Alternatively, you can install this extension manually:
 
 1. Download the lastest `.vsix` package file from the [https://github.com/docs/open-reusables](https://github.com/docs/open-reusables#) repository.
 
