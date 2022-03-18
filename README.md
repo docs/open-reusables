@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/open-reusable-icon.png" alt="logo">
+  <img src="https://raw.githubusercontent.com/docs/open-reusables/master/images/open-reusable-icon.png" alt="logo">
   <br>
   Open a reusable
   <br>
@@ -37,17 +37,17 @@ Alternatively run the extension from the command palette by choosing **Open reus
 
 To install this extension:
 
-1. Download the lastest `.vsix` package file from the [https://github.com/hubwriter/open-reusables](https://github.com/hubwriter/open-reusables#) repository.
+1. Download the lastest `.vsix` package file from the [https://github.com/docs/open-reusables](https://github.com/docs/open-reusables#) repository.
 
 1. Launch VS Code and display the extensions panel:
 
-   ![Extensions panel](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation1.png)
+   ![Extensions panel](https://raw.githubusercontent.com/docs/open-reusables/master/images/extension-installation1.png)
 
 1. Click the ellipsis button (top right of the panel).
 
 1. Choose **Install from VSIX**:
 
-   ![Install from VSIX option](https://raw.githubusercontent.com/hubwriter/open-reusables/master/images/extension-installation2.png)
+   ![Install from VSIX option](https://raw.githubusercontent.com/docs/open-reusables/master/images/extension-installation2.png)
 
 1. Browse to the `.vsix` file and click **Install**.
 
