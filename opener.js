@@ -21,15 +21,19 @@ function openMain() {
 
     var reusableRegex = /{% *data ([^ %]*) *%}/;
     var regexmatchArray = selectedString.match(reusableRegex);
-    
+
+    var regexmatchArrayResultPosition = 1;
+
     var matchType = null;
     if (regexmatchArray !== null) {
         matchType = 'reusable';
     } else {
-        var featureFlagRegex = /{% *(?:if|ifversion) *([^ %]*) *%}/;
+        var featureFlagRegex = /(?:{% *(?:if|ifversion) *([^ %]*) *%}|feature: '*([^ ']*)'* *$)/;
         regexmatchArray = selectedString.match(featureFlagRegex);
+        // console.log('regexmatchArray = ' + regexmatchArray);
         if (regexmatchArray !== null) {
             matchType = 'feature';
+            if (regexmatchArray[regexmatchArrayResultPosition] == null) { regexmatchArrayResultPosition = 2; }
         } else {
             vscode.window.showInformationMessage("You didn't select a valid reusable, variable, or feature flag.");
             return;
@@ -45,7 +49,7 @@ function openMain() {
     // console.log('isWin = ' + isWin);
     // console.log('directorySeparator = ' + directorySeparator);
 
-    var filepath = regexmatchArray[1];
+    var filepath = regexmatchArray[regexmatchArrayResultPosition];
     filepath = filepath.replace(/\./g, directorySeparator);
     
     var regex = new RegExp(".*\\" + directorySeparator + "(docs|docs-internal)\\" + directorySeparator, "g");

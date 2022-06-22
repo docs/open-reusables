@@ -11,7 +11,7 @@ function testNoTab(editor) {
 
 function getReusableString(editor) {
     let reusableString = "";
-    let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /{%[^%]*%}/ );
+    let objSelectTextAroundCursor = editor.document.getWordRangeAtPosition(editor.selection.active, /({%[^%]*%}|^ *feature: '*([^ ']*)'* *$)/);
     if (objSelectTextAroundCursor) {
         reusableString = editor.document.getText(objSelectTextAroundCursor); 
     }
