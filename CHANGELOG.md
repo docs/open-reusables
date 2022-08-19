@@ -1,5 +1,31 @@
 # Change log
 
+## 1.5.0
+19 August 2022
+- @lucascosti modified the extension ([PR #123](https://github.com/hubwriter/open-reusables/pull/123)) to allow you to open a feature flag file from the `feature` versioning in the article's front matter (i.e. the data at the top of the markdown file).
+
+   For example, in articles with frontmatter like this:
+
+   ```
+   versions:
+     feature: 'actions-caching'
+   ```
+
+   If you place the cursor within the string assigned to `feature` and activate the "Open reusable file" action of the extension - either from the command palette or by using the keyboard shortcut (Ctrl + Alt + o, or control + command + o) - the extension opens the file in which the feature flag is defined. This works if the feature is declared with single quotes, or without quotes.
+
+### Known issue
+The following is a known bug with this release. If you place the cursor on the feature string in the front matter and trigger the "Copy the reusable at the cursor position" action - either from the command palette or by using the keyboard shortcut (Ctrl + Alt + c, or control + command + c) - the extension stops working. The workaround if this happens is to disable and then re-enable the extension.
+
+## 1.4.2
+18 March 2022
+
+- Update the README to make it suitable for use on the Visual Studio Marketplace.
+
+## 1.4.1
+18 March 2022
+
+- Update the publisher name.
+
 ## 1.4.0 
 6 December 2021
 
