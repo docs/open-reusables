@@ -1,10 +1,15 @@
 # Change log
 
+## 1.5.1
+19 March 2022
+
+- Update the repository URL in the package.json file.
+
 ## 1.5.0
 19 August 2022
 - @lucascosti modified the extension ([PR #123](https://github.com/hubwriter/open-reusables/pull/123)) to allow you to open a feature flag file from the `feature` versioning in the article's front matter (i.e. the data at the top of the markdown file).
 
-   For example, in articles with frontmatter like this:
+   For example, in articles with front matter like this:
 
    ```
    versions:

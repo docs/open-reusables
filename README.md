@@ -9,11 +9,11 @@
 
 ## Overview
 
-Open the file corresponding to a Liquid tag for reusable text, a variable, or feature-based versioning, in the markdown file for an article on [docs.github.com](https://docs.github.com).
+Open the file corresponding to a Liquid tag for [reusable text](https://github.com/github/docs/blob/main/data/reusables), a [variable](https://github.com/github/docs/tree/main/data/variables), or [feature-based versioning](https://github.com/github/docs/tree/main/data/features#feature-based-versioning), in the markdown file for an article on [docs.github.com](https://docs.github.com).
 
 This Visual Studio Code extension works with markdown files in the public and internal repositories for GitHub's public-facing documentation. For example, the public [`docs`](https://github.com/github/docs) repository. 
 
-While you're displaying a markdown file for a GitHub help article in Visual Studio Code, you can click the Liquid tag for a variable or a reusable, or the opening tag for feature-based versioning, and then run the extension to open the related file for the variable, reusable, or version in a new Visual Studio Code tab. 
+While you're displaying a markdown file for a GitHub help article in Visual Studio Code, you can click the Liquid tag for a variable or a reusable, the opening tag for feature-based versioning, or the feature-based versioning string in the front matter, and then run the extension to open the related file for the variable, reusable, or version in a new Visual Studio Code tab. 
 
 You can also quickly copy the tag for a variable or a reusable. This is useful when you need to use the same variable more than once in an article.
 
