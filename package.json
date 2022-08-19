@@ -58,7 +58,7 @@
 	},
 	"repository": {
         "type": "git",
-        "url": "https://github.com/hubwriter/open-reusables/"
+        "url": "https://github.com/docs/open-reusables/"
 	},
 	"license": "see the LICENSE file",
     "dependencies": {
