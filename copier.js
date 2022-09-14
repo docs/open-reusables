@@ -33,8 +33,9 @@ function copyMain() {
             let textRange = new vscode.Range(startPosition, stopPosition);
             parseCharacter = editor.document.getText(textRange);
             // console.log('startSelection = ' + startSelection + '; parseCharacter = ' + parseCharacter);
-            // If it's an article feature flag versioning, move rightwards one.
-            if (parseCharacter.match(/'|"|:/)) { startSelection++; }
+            // If it's an article feature flag versioning, move rightwards one or two.
+            if (parseCharacter.match(/'|"/)) { startSelection++; }
+            else if (parseCharacter.match(/:/)) { startSelection = startSelection + 2; }
             moveLeftBy =  endSelection - startSelection;
             // console.log('move left by = ' + moveLeftBy);  
         }
