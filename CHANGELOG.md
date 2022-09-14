@@ -1,5 +1,10 @@
 # Change log
 
+## 1.5.2
+14 September 2022
+
+- @lucascosti fixed a bug that would stop the extension working after you attempted to use the copier feature on some `feature` entries in the front matter.
+
 ## 1.5.1
 19 March 2022
 
