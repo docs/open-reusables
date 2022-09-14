@@ -25,23 +25,31 @@ function copyMain() {
         startSelection = endSelection = editor.document.offsetAt(editor.selection.anchor);
         // Get the position of the start of the reusable
         // Do this by parsing each character from the cursor leftwards
-        // until reaching "{"
-        for (let parseCharacter = ""; parseCharacter != "{"; startSelection--) {
+        // until reaching "{" (for variables/reusables), or quotes or 
+        // a colon (:) for article feature flag versioning
+        for (let parseCharacter = ""; !parseCharacter.match(/{|'|"|:/); startSelection--) {
             let startPosition = editor.document.positionAt(startSelection);
             let stopPosition = editor.document.positionAt(startSelection+1);
             let textRange = new vscode.Range(startPosition, stopPosition);
             parseCharacter = editor.document.getText(textRange);
-            // console.log('startSelection = ' + startSelection + '; parseCharacter = ' + parseCharacter); 
+            // console.log('startSelection = ' + startSelection + '; parseCharacter = ' + parseCharacter);
+            // If it's an article feature flag versioning, move rightwards one or two.
+            if (parseCharacter.match(/'|"/)) { startSelection++; }
+            else if (parseCharacter.match(/:/)) { startSelection = startSelection + 2; }
             moveLeftBy =  endSelection - startSelection;
             // console.log('move left by = ' + moveLeftBy);  
         }
         // Get the position of the end of the reusable by parsing forwards
-        for (let parseCharacter = ""; parseCharacter != "}"; endSelection++) {
+        // until reaching "}" (for variables/reusables), or quotes or 
+        // a line end for article feature flag versioning
+        for (let parseCharacter = ""; !parseCharacter.match(/}|'|"|\n/); endSelection++) {
             let startPosition = editor.document.positionAt(endSelection);
             let stopPosition = editor.document.positionAt(endSelection+1);
             let textRange = new vscode.Range(startPosition, stopPosition);
             parseCharacter = editor.document.getText(textRange);
             // console.log('endSelection = ' + endSelection + '; parseCharacter = ' + parseCharacter);
+            // If it's an article feature flag versioning, move leftwards one.
+            if (parseCharacter.match(/'|"|\n/)) { endSelection--; }
             moveRightBy =  endSelection - startSelection;
             // console.log('move left by = ' + moveRightBy);      
         }       
@@ -58,11 +66,11 @@ function copyMain() {
             by: "character",
             value: moveRightBy,
             select: true
-        })              
+        })
 
     }
     else {
-        vscode.window.showInformationMessage("Open reusales extension: cursor is not within a reusable or variable");
+        vscode.window.showInformationMessage("Cursor is not within a reusable, variable, or feature flag.");
     }
 
 }
