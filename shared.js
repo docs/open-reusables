@@ -48,7 +48,7 @@ function getTypeAndValue(editorOrString) {
     // Check to see if it's a reusable or a feature flag in a liquid tag.
     if (liquidTagRegex.test(thingString)) {
         // This variable is all the contents inside the liquid tag.
-        // e.g. For the liquid tag {% data variables.product.prodname_dotcom %}, it is variables.product.prodname_dotcom
+        // e.g. For the liquid tag '{% data variables.product.prodname_dotcom %}', it is 'data variables.product.prodname_dotcom'
         let liquidTagContents = liquidTagRegex.exec(thingString)[0].trim();
         
         //console.log('liquidTagContents = ' + liquidTagContents);
@@ -58,6 +58,7 @@ function getTypeAndValue(editorOrString) {
         // - data <something>
         let reusableRegex = /data (\S*)/;
         if (reusableRegex.test(liquidTagContents)) {
+            // This is just the path of the reusable, (i.e. the stuff in the liquid tag after 'data').
             let reusableValue = reusableRegex.exec(liquidTagContents)[1];
             return ['reusable', reusableValue];
         }
@@ -68,6 +69,7 @@ function getTypeAndValue(editorOrString) {
         // - ifversion <something>
         let featureFlagRegex = /(?:if|ifversion) (\S*)/;
         if (featureFlagRegex.test(liquidTagContents)) {
+            // This is just the name of the feature flag, (i.e. the stuff in the after 'if' or 'ifversion').
             let featureValue = featureFlagRegex.exec(liquidTagContents)[1];
             return ['feature', featureValue];
         }
