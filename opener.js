@@ -12,33 +12,23 @@ function openMain() {
         return;
     }
 
+    // Use the current selection or cursor, and get the type (i.e. a reusable/feature flag) and value (i.e. the reusable path or the feature flag name)
     var selection = editor.selection;
     if (selection.isEmpty) {
-        var selectedString = shared.getReusableString(editor);
-        // console.log('selectedString = ' + selectedString);
+        var typeAndValue = shared.getTypeAndValue(editor);
     }
-    else selectedString = editor.document.getText(selection);
+    else { typeAndValue = shared.getTypeAndValue(editor.document.getText(selection)); }
+    
+    // console.log('typeAndValue = ' + typeAndValue);
 
-    var reusableRegex = /{% *data ([^ %]*) *%}/;
-    var regexmatchArray = selectedString.match(reusableRegex);
-
-    var regexmatchArrayResultPosition = 1;
-
-    var matchType = null;
-    if (regexmatchArray !== null) {
-        matchType = 'reusable';
+    if (!typeAndValue) {
+        vscode.window.showInformationMessage("You didn't select a valid reusable, variable, or feature flag.");
+        return;
     } else {
-        var featureFlagRegex = /(?:{% *(?:if|ifversion) *([^ %]*) *%}|feature: '*([^ ']*)'* *$)/;
-        regexmatchArray = selectedString.match(featureFlagRegex);
-        // console.log('regexmatchArray = ' + regexmatchArray);
-        if (regexmatchArray !== null) {
-            matchType = 'feature';
-            if (regexmatchArray[regexmatchArrayResultPosition] == null) { regexmatchArrayResultPosition = 2; }
-        } else {
-            vscode.window.showInformationMessage("You didn't select a valid reusable, variable, or feature flag.");
-            return;
-        }
+        var matchType = typeAndValue[0];
+        var pathOrName = typeAndValue[1];
     }
+
     // console.log('matchType = ' + matchType);
 
     var directorySeparator = "/";
@@ -49,11 +39,11 @@ function openMain() {
     // console.log('isWin = ' + isWin);
     // console.log('directorySeparator = ' + directorySeparator);
 
-    var filepath = regexmatchArray[regexmatchArrayResultPosition];
+    var filepath = pathOrName;
     filepath = filepath.replace(/\./g, directorySeparator);
     
     var regex = new RegExp(".*\\" + directorySeparator + "(docs|docs-internal)\\" + directorySeparator, "g");
-    regexmatchArray = currentFilePath.match(regex);
+    var regexmatchArray = currentFilePath.match(regex);
 
 
     switch (matchType) {
@@ -104,6 +94,8 @@ function openMain() {
     }, (err) => {
         vscode.window.showErrorMessage("File not found: " + filepath);
     });
+
+
 }
 
 function findLineNumberOfVariable(variableName) {
