@@ -18,7 +18,7 @@ const liquidTagRegex = /{%([^%])*%}/;
 // - feature: <something>
 const frontmatterFeatureFlagRegex = /^ *feature: '*([^ ']*)'* *$/;
 
-/* Get's the type and value of a reusable or feature flag.
+/* Gets the type and value of a reusable or feature flag.
    Returns an array with the type and value.
 
    The input can either be a string that is the user selection, or an editor
@@ -85,7 +85,7 @@ function getTypeAndValue(editorOrString) {
 }
 
 
-/* For or an editor object that is the active editor with it's cursor position,
+/* For an editor object that is the active editor with it's cursor position,
     get's the string of a reusable frontmatter feature flag.
 
     The return is a string that is the liquid tag or frontmatter feature flag syntax.
@@ -101,7 +101,7 @@ function getThingString(editor) {
         }
     }
 
-    // If we didn't find a match, return an null.
+    // If we didn't find a match, return null.
     return null;
 }
 
