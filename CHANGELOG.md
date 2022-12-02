@@ -3,10 +3,10 @@
 ## 1.6.0
 2 December 2022
 
-Major refactor of the code by @lucascosti to faciliate future changes to this extension. 
+Major refactor of the code by @lucascosti to facilitate future changes to this extension. 
 
 This version:
-- Adds the ability for the extension to open reusabales/feature versioning tags that contain whitespace control.
+- Adds the ability for the extension to open reusables/feature versioning tags that contain whitespace control.
 - Consolidates various regular expressions to improve code maintainability.
 
 ## 1.5.2
