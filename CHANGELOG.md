@@ -1,5 +1,10 @@
 # Change log
 
+## 1.7.1
+30 March 2023
+
+Updated the README file with details of how to use the extended features of the copy function.
+
 ## 1.7.0
 30 March 2023
 
