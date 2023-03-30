@@ -34,7 +34,12 @@ You can also quickly copy the tag for a variable or a reusable. This is useful w
    **Mac**: <kbd>control</kbd> + <kbd>command</kbd> + <kbd>c</kbd>
 
    **Windows**: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>c</kbd>
-
+   
+   You can also use the copy function to create the Liquid tag for a reusable, a variable, or a feature version, and put this into the clipboard for pasting into a Markdown file:
+   - In a variable file, place the cursor within a variable and use the copy function to copy the Liquid tag for that variable to the clipboard. For example, with the cursor on a variable called `prodname_docs` the tag `{% data variables.product.prodname_docs %}` is copied into the clipboard.
+   - Anywhere in a reusable file, use the copy function and the appropriate Liquid tag is copied to the clipboard. For example, in a reusable file called `user-settings.md`, the copy function puts the tag `{% data reusables.path.to.user-settings %}` into the clipboard.
+   - Anywhere in a feature version file, use the copy function to create the `ifversion` tags for that feature version. For example, in a feature version file called `copilot.yml` the tags `{% ifversion copilot %}{% endif %}` are copied into the clipboard.
+   
 Alternatively run the extension from the command palette by choosing **Open reusable file** or **Copy the reusable at the cursor position**.
 
 ## Installing the extension
