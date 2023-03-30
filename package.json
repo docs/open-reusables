@@ -20,11 +20,11 @@
 		"commands": [
 			{
 				"command": "open-reusable",
-				"title": "Open reusable file"
+				"title": "open-reusables: Open reusable file"
 			},
 			{
 				"command": "copy-reusable",
-				"title": "Copy the reusable at the cursor position"
+				"title": "open-reusables: Copy the reusable, variable, or feature flag at the cursor position"
 			}			
 		],
         "keybindings": [
