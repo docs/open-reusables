@@ -1,5 +1,14 @@
 # Change log
 
+## 1.7.0
+30 March 2023
+
+@lucascosti extended the existing copy command to generate a reference for a reusable, variable, or feature flag based on the cursor's position:
+
+* If you're in a reusable file, this creates the `{% data reusables.path.to.reusable %}` reference and copies it to the clipboard.
+* If you're in a variables file and on a variable definition line, this creates the `{% data variables.path.to.variablefile.variable-name %}` reference and copies it to the clipboard.
+* If you're in a feature flag file, this creates a versioning tag like `{% ifversion featureFlagName %}{% endif %}` and copies it to the clipboard.
+
 ## 1.6.0
 2 December 2022
 
