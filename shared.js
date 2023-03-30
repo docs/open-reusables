@@ -18,6 +18,16 @@ const liquidTagRegex = /{%([^%])*%}/;
 // - feature: <something>
 const frontmatterFeatureFlagRegex = /^ *feature: '*([^ ']*)'* *$/;
 
+// This regex matches paths to a reusable, variable, or feature flag. e.g.:
+// - data/reusables/<something>
+// - data/variables/<something>
+// - data/features/<something>
+// As well as the same paths with a backslash as the directory separator.
+const reusableOrVariableOrFeatureFlagPathRegex = /data.(reusables|variables|features).(.+)/;
+
+// This regex matches the name of a variable definition on a line in a variable file. e.g.: 
+const variableDefinitionNameRegex = /^([^:]*):/;
+
 /* Gets the type and value of a reusable or feature flag.
    Returns an array with the type and value.
 
@@ -110,5 +120,7 @@ function getThingString(editor) {
 module.exports = {
     testNoTab,
     getTypeAndValue,
-    getThingString
+    getThingString,
+    reusableOrVariableOrFeatureFlagPathRegex,
+    variableDefinitionNameRegex
 };
