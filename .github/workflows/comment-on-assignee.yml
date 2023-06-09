@@ -1,0 +1,29 @@
+name: Adding a comment to an issue when a user is assigned to it
+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hubwriter/assigned-issues@main
+        id: assigned-issues
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.event.issue.assignee.login }}
+      - uses: peter-evans/create-or-update-comment@v3.0.1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            @${{ github.event.issue.assignee.login }} has been assigned to this issue.
+         
+             <details><summary>More...</summary>
+             <p><br>As of this assignment, @${{ github.event.issue.assignee.login }} is assigned to a total of ${{ steps.assigned-issues.outputs.count }} issues in the ${{ github.repository }} repository.</p>            
+             <p>For a current list of issues in ${{ github.repository }} that are assigned to @${{ github.event.issue.assignee.login }}, <a href="${{ steps.assigned-issues.outputs.listpage }}">see these search results 🔗</a>.</p>
+             </details>
