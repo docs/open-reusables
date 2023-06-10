@@ -12,21 +12,20 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v3
-      - name: Log the assignees login array
-#       run: ASSIGNEE_COUNT=$(echo "${{ toJSON(github.event.issue.assignees.*.login) }}" | wc -l)-2; echo $ASSIGNEE_COUNT
-        run: echo "github.event.assignee.login ${{ github.event.assignee.login }}"
+#      - name: Log the assignees login array
+#        run: echo "github.event.assignee.login ${{ github.event.assignee.login }}"
       - uses: hubwriter/assigned-issues@main
         id: assigned-issues
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
-          username: ${{ github.event.issue.assignee.login }}
+          username: ${{ github.event.assignee.login }}
       - uses: peter-evans/create-or-update-comment@v3.0.1
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            @${{ github.event.issue.assignee.login }} has been assigned to this issue.
+            @${{ github.event.assignee.login }} has been assigned to this issue.
          
              <details><summary>More...</summary>
-             <p><br>As of this assignment, @${{ github.event.issue.assignee.login }} is assigned to a total of ${{ steps.assigned-issues.outputs.count }} issues in the ${{ github.repository }} repository.</p>            
-             <p>For a current list of issues in ${{ github.repository }} that are assigned to @${{ github.event.issue.assignee.login }}, <a href="${{ steps.assigned-issues.outputs.listpage }}">see these search results 🔗</a>.</p>
+             <p><br>As of this assignment, @${{ github.event.assignee.login }} is assigned to a total of ${{ steps.assigned-issues.outputs.count }} issues in the ${{ github.repository }} repository.</p>            
+             <p>For a current list of issues in ${{ github.repository }} that are assigned to @${{ github.event.assignee.login }}, <a href="${{ steps.assigned-issues.outputs.listpage }}">see these search results 🔗</a>.</p>
              </details>
