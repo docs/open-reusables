@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Log the assignees login array
- //       run: ASSIGNEE_COUNT=$(echo "${{ toJSON(github.event.issue.assignees.*.login) }}" | wc -l)-2; echo $ASSIGNEE_COUNT
+#       run: ASSIGNEE_COUNT=$(echo "${{ toJSON(github.event.issue.assignees.*.login) }}" | wc -l)-2; echo $ASSIGNEE_COUNT
         run: echo "github.event.assignee.login ${{ github.event.assignee.login }}"
       - uses: hubwriter/assigned-issues@main
         id: assigned-issues
